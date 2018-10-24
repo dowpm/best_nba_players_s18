@@ -33,6 +33,18 @@ class BestNbaPlayersS18::Players
             all.sort! do |player1, player2|
                 player1.name <=> player2.name
             end
+        when "age"
+            all.sort! do |player1, player2|
+                player1.statistics[:AGE] <=> player2.statistics[:AGE]
+            end
+        when "3pt"
+            all.sort! do |player1, player2|
+                player1.statistics[:THREEPT] <=> player2.statistics[:THREEPT]
+            end
+        when "ft"
+            all.sort! do |player1, player2|
+                player1.statistics[:FT] <=> player2.statistics[:FT]
+            end
         end
     end
 
