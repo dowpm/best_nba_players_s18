@@ -23,4 +23,17 @@ class BestNbaPlayersS18::Players
         all[input-1]
     end
 
+    def self.sort(input = "rank")
+        case input
+        when "rank"
+            all.sort! do |player1, player2|
+                player1.rank <=> player2.rank
+            end
+        when "name"
+            all.sort! do |player1, player2|
+                player1.name <=> player2.name
+            end
+        end
+    end
+
 end

@@ -1,4 +1,10 @@
 class BestNbaPlayersS18::CLI
+    URL = "https://www.washingtonpost.com/graphics/2017/sports/nba-top-100-players-2017/?noredirect=on&utm_term=.adcc13ae7e38"
+
+  def self.run
+    collections = BestNbaPlayersS18::Scraper.scrape_page(URL)
+    BestNbaPlayersS18::Players.create_players_from_collection collections
+  end
 
   def self.start
     input = ""
