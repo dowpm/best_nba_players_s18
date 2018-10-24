@@ -6,14 +6,25 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
+    coderay (1.1.2)
+    method_source (0.9.0)
+    mini_portile2 (2.3.0)
+    nokogiri (1.8.5-x64-mingw32)
+      mini_portile2 (~> 2.3.0)
+    pry (0.11.3)
+      coderay (~> 1.1.0)
+      method_source (~> 0.9.0)
     rake (10.5.0)
 
 PLATFORMS
   ruby
+  x64-mingw32
 
 DEPENDENCIES
   best_nba_players_s18!
   bundler (~> 1.16)
+  nokogiri
+  pry (~> 0.10)
   rake (~> 10.0)
 
 BUNDLED WITH
