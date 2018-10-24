@@ -2,7 +2,7 @@ class BestNbaPlayersS18::CLI
 
   def self.start
     input = ""
-    until input == "n" or input2 == "no"
+    until input == "n" or input == "no"
       input = -1
       until input > 0 and input < 5
         puts "Invalid input!!! \n" if input == 0 or input > 5
