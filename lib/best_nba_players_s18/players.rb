@@ -23,29 +23,36 @@ class BestNbaPlayersS18::Players
         all[input-1]
     end
 
-    def self.sort(input = "rank")
-        case input
-        when "rank"
-            all.sort! do |player1, player2|
-                player1.rank <=> player2.rank
-            end
-        when "name"
-            all.sort! do |player1, player2|
-                player1.name <=> player2.name
-            end
-        when "age"
-            all.sort! do |player1, player2|
-                player1.statistics[:AGE] <=> player2.statistics[:AGE]
-            end
-        when "3pt"
-            all.sort! do |player1, player2|
-                player1.statistics[:THREEPT] <=> player2.statistics[:THREEPT]
-            end
-        when "ft"
-            all.sort! do |player1, player2|
-                player1.statistics[:FT] <=> player2.statistics[:FT]
-            end
+    def self.sort(input = 1)
+        # choice = ["rank","name","position","team","AGE","PPG","RPG","APG","STL","FG","FT","THREEPT","BLK"]
+        choice = ["rank","AGE","PPG","RPG","APG","THREEPT","BLK","FT"]
+        by_input = choice[input-1]
+        if input > 1
+            return sort_asc by_input, true if by_input == "AGE"
+            return sort_desc by_input, true
+        else
+            return sort_asc by_input
         end
+    end
+
+    def self.sort_asc by_input, stats = false
+        if !stats
+            all.sort! do |player1, player2|
+                player1.send(by_input) <=> player2.send(by_input)
+            end
+            return by_input
+        else
+            all.sort! do |player1, player2|
+                player1.send("statistics")[by_input.to_sym] <=> player2.send("statistics")[by_input.to_sym]
+            end
+            return ["statistics",by_input]
+        end
+    end
+    def self.sort_desc by_input, stats = false
+        all.sort! do |player1, player2|
+            player2.send("statistics")[by_input.to_sym] <=> player1.send("statistics")[by_input.to_sym]
+        end
+        return ["statistics",by_input]
     end
 
 end
