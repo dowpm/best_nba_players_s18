@@ -56,6 +56,7 @@ class BestNbaPlayersS18::CLI
   end
 
   def self.print_players(from_number, order = "rank", stats = "")
+    color = ""
 
     if stats == ""
       rows = BestNbaPlayersS18::Players.all[from_number-1, 20].each.with_index(from_number).map do |player, index|
@@ -72,8 +73,11 @@ class BestNbaPlayersS18::CLI
   end
 
   def self.print_player player
+    color = :green if player.trend = "up"
+    color = :red if player.trend = "down"
+    # color = :green if player.trend = "neutral"
     table = Terminal::Table.new :title => "#{player.name}", :rows => [
-      ["Age", player.statistics[:AGE]],
+      ["Age", player.statistics[:AGE].colorize(color)],
       ["Position", player.position],
       ["Team", player.team],
       ["Rank", player.rank],
@@ -84,7 +88,8 @@ class BestNbaPlayersS18::CLI
       ["FT", player.statistics[:FT]],
       ["Steal", player.statistics[:STL]],
       ["FG", player.statistics[:FG]],
-      ["3PT", player.statistics[:THREEPT]]
+      ["3PT", player.statistics[:THREEPT]],
+      ["trend", player.trend]
     ]
     puts table
   end

@@ -4,6 +4,7 @@ require 'pry'
 require 'nokogiri'
 require 'open-uri'
 require 'terminal-table'
+require 'colorize'
 
 module BestNbaPlayersS18
   # Your code goes here...
