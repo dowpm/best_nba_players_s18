@@ -1,5 +1,11 @@
 class BestNbaPlayersS18::CLI
     URL = "https://www.washingtonpost.com/graphics/2017/sports/nba-top-100-players-2017/?noredirect=on&utm_term=.adcc13ae7e38"
+    COLORIER = ->(player){
+      color = ""
+      color = :green if player.trend == "up"
+      color = :red if player.trend == "down"
+      color
+    }
 
   def self.run
     collections = BestNbaPlayersS18::Scraper.scrape_page(URL)
@@ -56,15 +62,16 @@ class BestNbaPlayersS18::CLI
   end
 
   def self.print_players(from_number, order = "rank", stats = "")
-    color = ""
-
+    
     if stats == ""
       rows = BestNbaPlayersS18::Players.all[from_number-1, 20].each.with_index(from_number).map do |player, index|
-         [index, player.name, "#{order}:#{player.send(order)}"]
+        # colorier.(player)
+        [index, player.name.colorize(COLORIER.(player)), "#{order}:#{player.send(order)}"]
       end
     else
       rows = BestNbaPlayersS18::Players.all[from_number-1, 20].each.with_index(from_number).map do |player, index|
-        [index, player.name, "#{stats} : #{player.send(order)[stats.to_sym]}"]
+        
+        [index, player.name.colorize(COLORIER.(player)), "#{stats} : #{player.send(order)[stats.to_sym]}"]
       end
     end
 
@@ -73,23 +80,19 @@ class BestNbaPlayersS18::CLI
   end
 
   def self.print_player player
-    color = :green if player.trend = "up"
-    color = :red if player.trend = "down"
-    # color = :green if player.trend = "neutral"
     table = Terminal::Table.new :title => "#{player.name}", :rows => [
-      ["Age", player.statistics[:AGE].colorize(color)],
-      ["Position", player.position],
-      ["Team", player.team],
-      ["Rank", player.rank],
-      ["PPG", player.statistics[:PPG]],
-      ["RPG", player.statistics[:RPG]],
-      ["APG", player.statistics[:APG]],
-      ["BLK", player.statistics[:BLK]],
-      ["FT", player.statistics[:FT]],
-      ["Steal", player.statistics[:STL]],
-      ["FG", player.statistics[:FG]],
-      ["3PT", player.statistics[:THREEPT]],
-      ["trend", player.trend]
+      ["Age", player.statistics[:AGE].colorize(COLORIER.(player))],
+      ["Position", player.position.colorize(COLORIER.(player))],
+      ["Team", player.team.colorize(COLORIER.(player))],
+      ["Rank", player.rank.to_s.colorize(COLORIER.(player))],
+      ["PPG", player.statistics[:PPG].to_s.colorize(COLORIER.(player))],
+      ["RPG", player.statistics[:RPG].to_s.colorize(COLORIER.(player))],
+      ["APG", player.statistics[:APG].to_s.colorize(COLORIER.(player))],
+      ["BLK", player.statistics[:BLK].to_s.colorize(COLORIER.(player))],
+      ["FT", player.statistics[:FT].to_s.colorize(COLORIER.(player))],
+      ["Steal", player.statistics[:STL].to_s.colorize(COLORIER.(player))],
+      ["FG", player.statistics[:FG].to_s.colorize(COLORIER.(player))],
+      ["3PT", player.statistics[:THREEPT].to_s.colorize(COLORIER.(player))]
     ]
     puts table
   end
