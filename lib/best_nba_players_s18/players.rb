@@ -29,7 +29,7 @@ class BestNbaPlayersS18::Players
         by_input = choice[input-1]
         if input > 1
             return sort_asc by_input, true if by_input == "AGE"
-            return sort_desc by_input, true
+            return sort_desc by_input
         else
             return sort_asc by_input
         end

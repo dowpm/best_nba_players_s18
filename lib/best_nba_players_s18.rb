@@ -3,6 +3,7 @@ require "best_nba_players_s18/version"
 require 'pry'
 require 'nokogiri'
 require 'open-uri'
+require 'terminal-table'
 
 module BestNbaPlayersS18
   # Your code goes here...

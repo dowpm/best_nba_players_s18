@@ -55,16 +55,21 @@ class BestNbaPlayersS18::CLI
   end
 
   def self.print_players(from_number, order = "rank", stats = "")
-    puts "\n---------- Players #{from_number} - #{from_number+19} ----------\n"
+    # puts "\n---------- Players #{from_number} - #{from_number+19} ----------\n"
     if stats == ""
-      BestNbaPlayersS18::Players.all[from_number-1, 20].each.with_index(from_number) do |player, index|
-        puts "#{index}. #{player.name}\t #{order}:#{player.send(order)}"
+      # BestNbaPlayersS18::Players.all[from_number-1, 20].each.with_index(from_number) do |player, index|
+      #   puts "#{index}. #{player.name}\t #{order}:#{player.send(order)}"
+      # end
+      rows = BestNbaPlayersS18::Players.all[from_number-1, 20].each.with_index(from_number).map do |player, index|
+         [index, player.name, "#{order}:#{player.send(order)}"]
       end
     else
-      BestNbaPlayersS18::Players.all[from_number-1, 20].each.with_index(from_number) do |player, index|
-        puts "#{index}. #{player.name}\t #{stats}:#{player.send(order)[stats.to_sym]}"
+      rows = BestNbaPlayersS18::Players.all[from_number-1, 20].each.with_index(from_number).map do |player, index|
+        [index, player.name, "#{stats} : #{player.send(order)[stats.to_sym]}"]
       end
     end
+    table = Terminal::Table.new :title => "Players #{from_number} - #{from_number+19}", :rows => rows, :style => {:all_separators => true}
+    puts table
   end
 
 end
