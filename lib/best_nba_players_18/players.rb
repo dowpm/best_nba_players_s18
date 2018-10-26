@@ -61,4 +61,8 @@ class BestNbaPlayersS18::Players
         end
     end
 
+    def self.find_group index, by_input
+        group(by_input)[index-1]
+    end
+
 end
