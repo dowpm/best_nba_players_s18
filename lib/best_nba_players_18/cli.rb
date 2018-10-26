@@ -47,6 +47,7 @@ class BestNbaPlayersS18::CLI
           puts "\n What number of players do you want to see? 1-20, 21-40, 41-60, 61-80 or 81-100?  "
             print "=> "
           n_palyer = gets.strip.to_i
+          n_palyer = 1 if n_palyer == 0
 
           #print_players index
           print_players n_palyer, order  if order.class == String
@@ -70,6 +71,8 @@ class BestNbaPlayersS18::CLI
           puts "\n What group of trends do you want to see?"," (1- consistent, 2-"+" upswing".colorize(:green)+", 3-"+" decline".colorize(:red)+")"
             print "=> "
           n_trend = gets.strip.to_i
+          n_trend = 1 if n_trend  == 0
+
           choices = ["neutral", "up", "down"]
           by_input = choices[n_trend-1]
 
