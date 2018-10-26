@@ -19,10 +19,19 @@ class BestNbaPlayersS18::CLI
       opt = -1
       until opt > 0 and opt <= 9
         puts "Invalid input!!! \n" if opt == 0 or opt >= 9
-        puts "Choose an option", "1. List all players by ranking", "2. List all players by Age"
-        puts "3. List all players by points", "4. List all players by rebounds", "5. List all players by assists"
-        puts "6. List all players by 3pt", "7. List all players by blocks", "8. List all players by free throw"
-        puts "9. Exit"
+        rows = [
+          ["1","List all players by ranking"],["2", "List all players by Age"],
+          ["3","List all players by points"],["4", "List all players by rebounds"],
+          ["5","List all players by assists"],["6", "List all players by 3pt"],
+          ["7","List all players by blocks"],["8", "List all players by free throw"],
+          ["9","Exit"],["10", "List all players by Age"],
+        ]
+        # puts "Choose an option", "1. List all players by ranking", "2. List all players by Age"
+        # puts "3. List all players by points", "4. List all players by rebounds", "5. List all players by assists"
+        # puts "6. List all players by 3pt", "7. List all players by blocks", "8. List all players by free throw"
+        # puts "9. Exit"
+        table = Terminal::Table.new :title => "Menu", :rows => rows, :style => {:all_separators => true}
+        puts table
         print "=> "
         opt = gets.strip.to_i
 
