@@ -14,22 +14,21 @@ class BestNbaPlayersS18::CLI
 
   def self.start
     run
+    binding.pry
+    system "cls" or system "clear"
+    puts "Welcome to my best_nba_players_18 gem","--**player is on ["+"upswing".colorize(:green)+", consistency, "+"decline".colorize(:red)+ "] of his career.**--\n"
     input = ""
     until input == "n" or input == "no"
       opt = -1
       until opt > 0 and opt <= 9
         puts "Invalid input!!! \n" if opt == 0 or opt >= 9
         rows = [
-          ["1","List all players by ranking"],["2", "List all players by Age"],
-          ["3","List all players by points"],["4", "List all players by rebounds"],
-          ["5","List all players by assists"],["6", "List all players by 3pt"],
-          ["7","List all players by blocks"],["8", "List all players by free throw"],
-          ["9","Exit"],["10", "List all players by Age"],
+          ["1. List all players by ranking","2. List all players by Age"],
+          ["3. List all players by points","4. List all players by rebounds"],
+          ["5. List all players by assists","6. List all players by 3pt"],
+          ["7. List all players by blocks","8. List all players by free throw"],
+          ["9. Group by trend","10. Exit"],
         ]
-        # puts "Choose an option", "1. List all players by ranking", "2. List all players by Age"
-        # puts "3. List all players by points", "4. List all players by rebounds", "5. List all players by assists"
-        # puts "6. List all players by 3pt", "7. List all players by blocks", "8. List all players by free throw"
-        # puts "9. Exit"
         table = Terminal::Table.new :title => "Menu", :rows => rows, :style => {:all_separators => true}
         puts table
         print "=> "
@@ -44,6 +43,7 @@ class BestNbaPlayersS18::CLI
 
       until input == "n" or input == "no"
         puts "\n What number of players do you want to see? 1-20, 21-40, 41-60, 61-80 or 81-100?  "
+          print "=> "
         n_palyer = gets.strip.to_i
 
         #print_players index
@@ -51,6 +51,7 @@ class BestNbaPlayersS18::CLI
         print_players n_palyer, order[0], order[1]  if order.class == Array
 
         puts "What player do you want to see more information on?"
+          print "=> "
         input = gets.strip.to_i
 
         #print_player index
@@ -59,11 +60,14 @@ class BestNbaPlayersS18::CLI
         print_player player
 
         puts "Do you want to see information about another player? (y/n)"
+        print "=> "
         input = gets.strip.downcase
       end
 
       puts "Do you want to list all players? (y/n)"
+      print "=> "
       input = gets.strip.downcase
+      system "cls" or system "clear"
     end
 
     puts "Goodbye !!"

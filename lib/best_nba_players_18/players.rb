@@ -25,8 +25,8 @@ class BestNbaPlayersS18::Players
 
     def self.sort(input = 1)
         # choice = ["rank","name","position","team","AGE","PPG","RPG","APG","STL","FG","FT","THREEPT","BLK"]
-        choice = ["rank","AGE","PPG","RPG","APG","THREEPT","BLK","FT"]
-        by_input = choice[input-1]
+        choices = ["rank","AGE","PPG","RPG","APG","THREEPT","BLK","FT"]
+        by_input = choices[input-1]
         if input > 1
             return sort_asc by_input, true if by_input == "AGE"
             return sort_desc by_input
@@ -53,6 +53,12 @@ class BestNbaPlayersS18::Players
             player2.send("statistics")[by_input.to_sym] <=> player1.send("statistics")[by_input.to_sym]
         end
         return ["statistics",by_input]
+    end
+
+    def self.group by_input
+        all.select do |player|
+            player.trend == by_input
+        end
     end
 
 end
