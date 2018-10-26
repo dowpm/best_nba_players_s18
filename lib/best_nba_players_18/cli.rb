@@ -14,9 +14,8 @@ class BestNbaPlayersS18::CLI
 
   def self.start
     run
-    # binding.pry
     system "cls" or system "clear"
-    puts "Welcome to my best_nba_players_18 gem","--**player is on ["+"upswing".colorize(:green)+", consistency, "+"decline".colorize(:red)+ "] of his career.**--\n"
+    puts "Welcome to best_nba_players_18 gem","--**player's trend ("+"upswing".colorize(:green)+", constant, "+"decline".colorize(:red)+ ") .**--\n"
     input = ""
     until input == "n" or input == "no"
       opt = -1
@@ -29,8 +28,7 @@ class BestNbaPlayersS18::CLI
           ["7. List all players by blocks","8. List all players by free throw"],
           ["9. Group by trend","10. Exit"],
         ]
-        table = Terminal::Table.new :title => "Menu", :rows => rows, :style => {:all_separators => true}
-        puts table
+        puts Terminal::Table.new :title => "Menu", :rows => rows, :style => {:all_separators => true}
         print "=> "
         opt = gets.strip.to_i
 
@@ -40,12 +38,13 @@ class BestNbaPlayersS18::CLI
       break if opt == 10
 
       if opt != 9
-        #sort the @@all
+        #sort the @@all by_input
+        #return an array for stats
         order =  BestNbaPlayersS18::Players.sort opt
 
         until input == "n" or input == "no"
           puts "\n What number of players do you want to see? 1-20, 21-40, 41-60, 61-80 or 81-100?  "
-            print "=> "
+          print "=> "
           n_palyer = gets.strip.to_i
           n_palyer = 1 if n_palyer == 0
 
@@ -54,12 +53,11 @@ class BestNbaPlayersS18::CLI
           print_players n_palyer, order[0], order[1]  if order.class == Array
 
           puts "What player do you want to see more information on?"
-            print "=> "
+          print "=> "
           input = gets.strip.to_i
 
           #print_player index
           player = BestNbaPlayersS18::Players.find input
-          # puts player.name, "\n"
           print_player player
 
           puts "Do you want to see information about another player? (y/n)"
@@ -68,8 +66,8 @@ class BestNbaPlayersS18::CLI
         end
       else
         until input == "n" or input == "no"
-          puts "\n What group of trends do you want to see?"," (1- consistent, 2-"+" upswing".colorize(:green)+", 3-"+" decline".colorize(:red)+")"
-            print "=> "
+          puts "\n What group of trends do you want to see?"," (1- constant, 2-"+" upswing".colorize(:green)+", 3-"+" decline".colorize(:red)+")"
+          print "=> "
           n_trend = gets.strip.to_i
           n_trend = 1 if n_trend  == 0
 
@@ -80,12 +78,11 @@ class BestNbaPlayersS18::CLI
           print_players_group by_input
 
           puts "What player do you want to see more information on?"
-            print "=> "
+          print "=> "
           input = gets.strip.to_i
 
           #print_player index
           player = BestNbaPlayersS18::Players.find_group input, by_input
-          # puts player.name, "\n"
           print_player player
 
           puts "Do you want to see information about another player? (y/n)"
@@ -108,18 +105,15 @@ class BestNbaPlayersS18::CLI
     
     if stats == ""
       rows = BestNbaPlayersS18::Players.all[from_number-1, 20].each.with_index(from_number).map do |player, index|
-        
         [index, player.name.colorize(COLORIER.(player)), "#{order}:#{player.send(order)}"]
       end
     else
       rows = BestNbaPlayersS18::Players.all[from_number-1, 20].each.with_index(from_number).map do |player, index|
-        
         [index, player.name.colorize(COLORIER.(player)), "#{stats} : #{player.send(order)[stats.to_sym]}"]
       end
     end
 
-    table = Terminal::Table.new :title => "Players #{from_number} - #{from_number+19}", :rows => rows, :style => {:all_separators => true}
-    puts table
+    puts Terminal::Table.new :title => "Players #{from_number} - #{from_number+19}", :rows => rows, :style => {:all_separators => true}
   end
 
   def self.print_player player
@@ -143,14 +137,15 @@ class BestNbaPlayersS18::CLI
   def self.print_players_group by_input
     arr, rows = [], []
     BestNbaPlayersS18::Players.group(by_input).each.with_index(1) do |player, i|
-      # [i, player.name]
-      arr.push i, player.name, " "
+
+      arr.push i, player.name.colorize(COLORIER.(player)), " "
       if arr.size == 6
         rows << arr
         arr = []
       end
+
     end
-    title = {up: "UPSWING", down: "DECLINE", neutral: "CONSISTENT"}
+    title = {up: "UPSWING".colorize(:green), down: "DECLINE".colorize(:red), neutral: "CONSTANT"}
     puts Terminal::Table.new :title => title[by_input.to_sym], :rows => rows, :style =>{:all_separators => true}
   end
 

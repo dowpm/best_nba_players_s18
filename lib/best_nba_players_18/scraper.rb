@@ -1,15 +1,11 @@
 class BestNbaPlayersS18::Scraper
 
     def self.scrape_page url
-        # url = "https://www.washingtonpost.com/graphics/2017/sports/nba-top-100-players-2017/?noredirect=on&utm_term=.adcc13ae7e38"
         nokogiri_url = Nokogiri::HTML(open(url))
         players_neutral_nokogiri = nokogiri_url.search(".player-container.trend-neutral div.player-info-inner")
         players_up_nokogiri = nokogiri_url.search(".player-container.trend-up div.player-info-inner")
         players_down_nokogiri = nokogiri_url.search(".player-container.trend-down div.player-info-inner")
     
-        # ["\nPPG\n\u2013", "RPG\n\u2013", "", "\nAPG\n\u2013", "", "\nAGE\n21", "STL\n\u2013", "FG\n\u2013", "FT\n\u2013", "3PT\n\u2013", "BLK\n\u2013\n"]
-
-        # binding.pry
         players_neutral = players_neutral_nokogiri.map do |p|
             stats = p.css("ul.player-info-barns li").text.gsub("\s","").split("\n\n")
             {
