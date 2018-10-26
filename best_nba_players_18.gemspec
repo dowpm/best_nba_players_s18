@@ -1,10 +1,10 @@
 
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "best_nba_players_s18/version"
+require "best_nba_players_18/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "best_nba_players_s18"
+  spec.name          = "best_nba_players_18"
   spec.version       = BestNbaPlayersS18::VERSION
   spec.authors       = ["'Mac Dowell Prosper'"]
   spec.email         = ["'macdowell@noukod.com'"]

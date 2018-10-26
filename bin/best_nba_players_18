@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+
+require "bundler/setup"
+require "best_nba_players_18"
+
+puts "Welcome to my best_nba_players_18 gem"
+
+BestNbaPlayersS18::CLI.start

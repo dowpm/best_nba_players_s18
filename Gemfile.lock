@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    best_nba_players_s18 (0.1.0)
+    best_nba_players_18 (0.1.0)
 
 GEM
   remote: https://rubygems.org/
@@ -27,7 +27,7 @@ PLATFORMS
   x64-mingw32
 
 DEPENDENCIES
-  best_nba_players_s18!
+  best_nba_players_18!
   bundler (~> 1.16)
   colorize
   nokogiri
