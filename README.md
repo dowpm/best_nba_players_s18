@@ -20,7 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
-Type the below and follow the on screen prompts.
+Type the below and follow the on screen prompts:
     $ best_nba_players_s18
 
 ## Development
