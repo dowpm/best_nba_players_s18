@@ -1,6 +1,6 @@
 require "best_nba_players_18/version"
 
-require 'pry'
+#require 'pry'
 require 'nokogiri'
 require 'open-uri'
 require 'terminal-table'
