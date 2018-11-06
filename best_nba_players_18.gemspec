@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require "best_nba_players_18/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "best_nba_players_s18"
+  spec.name          = "best_nba_players_18"
   spec.version       = BestNbaPlayersS18::VERSION
   spec.authors       = ["'Mac Dowell Prosper'"]
   spec.email         = ["'macdowell@noukod.com'"]
@@ -38,7 +38,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake", "~> 10.0"
 
   spec.add_development_dependency "pry", "~> 0.10"
-  spec.add_runtime_dependency "nokogiri", '~> 1.8.0'
-  spec.add_runtime_dependency "terminal-table", '~> 1.8.0'
-  spec.add_runtime_dependency "colorize", "~> 0.8.0"
+  spec.add_dependency "nokogiri", '~> 1.8', '>= 1.8.4'
+  spec.add_dependency "terminal-table", '~> 1.8', '>= 1.7.9'
+  spec.add_dependency "colorize", "~> 0.8.0"
 end
