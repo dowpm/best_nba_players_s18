@@ -66,5 +66,9 @@ module BestNbaPlayersS18
             group(by_input)[index-1]
         end
 
+        def self.group_size by_input
+            group(by_input).size
+        end
+
     end
 end

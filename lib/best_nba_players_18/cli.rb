@@ -48,6 +48,7 @@ module BestNbaPlayersS18
             print "=> "
             n_palyer = gets.strip.to_i
             n_palyer = 1 if n_palyer == 0
+            n_palyer = 80 if n_palyer > 100
 
             #print_players index
             print_players n_palyer, order  if order.class == String
@@ -56,6 +57,7 @@ module BestNbaPlayersS18
             puts "What player do you want to see more information on?"
             print "=> "
             input = gets.strip.to_i
+            input = 100 if input > 100
 
             #print_player index
             player = BestNbaPlayersS18::Players.find input
@@ -71,6 +73,7 @@ module BestNbaPlayersS18
             print "=> "
             n_trend = gets.strip.to_i
             n_trend = 1 if n_trend  == 0
+            n_trend = 3 if n_trend > 3
 
             choices = ["neutral", "up", "down"]
             by_input = choices[n_trend-1]
@@ -81,6 +84,8 @@ module BestNbaPlayersS18
             puts "What player do you want to see more information on?"
             print "=> "
             input = gets.strip.to_i
+            sizeg = BestNbaPlayersS18::Players.group_size by_input
+            input = sizeg if input > sizeg
 
             #print_player index
             player = BestNbaPlayersS18::Players.find_group input, by_input
@@ -146,6 +151,7 @@ module BestNbaPlayersS18
         end
 
       end
+      rows << arr
       title = {up: "UPSWING".colorize(:green), down: "DECLINE".colorize(:red), neutral: "CONSTANT"}
       puts Terminal::Table.new :title => title[by_input.to_sym], :rows => rows, :style =>{:all_separators => true}
     end
