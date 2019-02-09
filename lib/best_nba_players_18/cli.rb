@@ -37,7 +37,7 @@ module BestNbaPlayersS18
         end
         
         break if opt == 10
-
+ 
         if opt != 9
           #sort the @@all by_input
           #return an array for stats
@@ -52,7 +52,7 @@ module BestNbaPlayersS18
 
             #print_players index
             print_players n_palyer, order  if order.class == String
-            print_players n_palyer, order[0], order[1]  if order.class == Array
+            print_players n_palyer, *order  if order.class == Array
 
             puts "What player do you want to see more information on?"
             print "=> "
@@ -136,6 +136,7 @@ module BestNbaPlayersS18
         ["Steal", player.statistics[:STL].to_s.colorize(COLORIER.(player))],
         ["FG", player.statistics[:FG].to_s.colorize(COLORIER.(player))],
         ["3PT", player.statistics[:THREEPT].to_s.colorize(COLORIER.(player))]
+        #["Info", player.info.colorize(COLORIER.(player))]
       ]
       puts table
     end
