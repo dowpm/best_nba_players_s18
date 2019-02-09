@@ -1,5 +1,5 @@
 module BestNbaPlayersS18
-    class BestNbaPlayersS18::Players
+    class Players
         attr_accessor :trend, :name, :team, :position, :statistics, :rank, :info
         @@all = []
 

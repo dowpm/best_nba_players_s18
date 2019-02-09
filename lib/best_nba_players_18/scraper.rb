@@ -1,5 +1,5 @@
 module BestNbaPlayersS18
-    class BestNbaPlayersS18::Scraper
+    class Scraper
 
         def self.scrape_page url
             nokogiri_url = Nokogiri::HTML(open(url))
